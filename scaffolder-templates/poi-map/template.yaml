@@ -89,12 +89,6 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public    
-    - id: registerSource
-      name: Registering the Source Code Component
-      action: catalog:register
-      input:
-        repoContentsUrl: ${{steps.publishSource.output.repoContentsUrl}}
-        catalogInfoPath: /catalog-info.yaml
     - id: templateGitops
       name: Generating the deployment resources and artefacts
       action: fetch:template
@@ -125,6 +119,12 @@ spec:
         defaultBranch: main
         protectDefaultBranch: false
         repoVisibility: public
+    - id: registerSource
+      name: Registering the Source Code Component
+      action: catalog:register
+      input:
+        repoContentsUrl: ${{steps.publishSource.output.repoContentsUrl}}
+        catalogInfoPath: /catalog-info.yaml
     - id: createArgoResources
       name: Create ArgoCD Resources
       action: argocd:create-resources
